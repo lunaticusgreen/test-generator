@@ -17,8 +17,10 @@ const checkFile = (filePath, fileName) => {
     fs.readFile(fullPath, function (err, data) {
         if (err) throw err;
         const withConnect = /import {\s?connect\s?} from 'react-redux'/.test(data.toString('utf8'))
-        const moduleName = (data.toString('utf8').match(/export\s+(const)?\s?(class|function)\s+(\w+)/) || data.toString('utf8').match(/export\s+const\s+(\w+)/) )
-
+        const moduleName =
+          (data.toString('utf8').match(/export\s+(const)?\s?(class|function)\s+(\w+)/)
+            || data.toString('utf8').match(/export\s+const\s+(\w+)/) )
+        console.log('moduleName', moduleName);
         fs.access(testPath, fs.F_OK, (err) => {
             if (err) {
                 let fileContent = getTestTemplate(fileName, withConnect, moduleName[moduleName.length - 1 ])
