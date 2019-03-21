@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var walk = function (dir, regExcludes, done) {
+var walk = function (dir, done) {
     var results = [];
 
     fs.readdir(dir, function (err, list) {
@@ -14,17 +14,14 @@ var walk = function (dir, regExcludes, done) {
             file = path.join(dir, file);
 
             var excluded = false;
-            var len = regExcludes.length;
             var i = 0;
 
-            for (; i < len; i++) {
-                if (file.match(/\.jsx$/)) {
-                    // if (file.match(/\.jsx/)) {
-                    //     console.log('----',file)
-                        results.push(file)
-                        excluded = true;
-                    // }
-                }
+            if (file.match(/\.jsx$/)) {
+                // if (file.match(/\.jsx/)) {
+                //     console.log('----',file)
+                    results.push(file)
+                    excluded = true;
+                // }
             }
 
             // Add if not in regExcludes
@@ -37,7 +34,7 @@ var walk = function (dir, regExcludes, done) {
                         //     console.log(file)
                         // }
                         // If it is, walk again
-                        walk(file, regExcludes, function (err, res) {
+                        walk(file, function (err, res) {
                             results = results.concat(res);
 
                             if (!--pending) { done(null, results); }

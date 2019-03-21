@@ -5,7 +5,7 @@ const {checkFile} = require('./check-and-create-file')
 
 
 process.argv.slice(2).forEach(function (val, index, array) {
-    walk(val, regExcludes, function(err, results) {
+    walk(val, function(err, results) {
         if (err) {
             throw err;
         }
