@@ -14,7 +14,9 @@ process.argv.slice(2).forEach(function (val, index, array) {
             let fullPath = file.split('/')
             let fileName = fullPath.splice(fullPath.length - 1)[0]
             let dir = fullPath.join('/')
-            checkFile(dir, fileName)
+            if (!/(\.test\.jsx|index)/.test(file)) {
+                checkFile(dir, fileName)
+            }
             // fs.readdir(dir, (err, files) => {
             //     console.log(dir,files);
             //     var jsxShit = files.filter( file => /jsx$/.test(file)).filter( file => !/(\.test\.jsx|index)/.test(file))
