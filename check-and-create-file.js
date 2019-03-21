@@ -20,10 +20,9 @@ const checkFile = (filePath, fileName) => {
         const moduleName =
           (data.toString('utf8').match(/export\s+(const)?\s?(class|function)\s+(\w+)/)
             || data.toString('utf8').match(/export\s+const\s+(\w+)/) )
-        console.log('moduleName', moduleName);
         fs.access(testPath, fs.F_OK, (err) => {
             if (err) {
-                let fileContent = getTestTemplate(fileName, withConnect, moduleName[moduleName.length - 1 ])
+                let fileContent = getTestTemplate(fileName, withConnect, moduleName && moduleName[moduleName.length - 1 ])
                 createFileFromTemplate(testPath,fileContent)
             }
             // if file is exist - do nothing

@@ -18,9 +18,12 @@ var walk = function (dir, regExcludes, done) {
             var i = 0;
 
             for (; i < len; i++) {
-                if (file.match(regExcludes[i])) {
-                    results.push(file)
-                    excluded = true;
+                if (file.match(/\.jsx$/)) {
+                    // if (file.match(/\.jsx/)) {
+                    //     console.log('----',file)
+                        results.push(file)
+                        excluded = true;
+                    // }
                 }
             }
 
@@ -30,9 +33,9 @@ var walk = function (dir, regExcludes, done) {
                 // Check if its a folder
                 fs.stat(file, function (err, stat) {
                     if (stat && stat.isDirectory()) {
-                        if (file.match(/(form-partials|page-partials)/)) {
-                            console.log(file)
-                        }
+                        // if (file.match(/(form-partials|page-partials)/)) {
+                        //     console.log(file)
+                        // }
                         // If it is, walk again
                         walk(file, regExcludes, function (err, res) {
                             results = results.concat(res);
